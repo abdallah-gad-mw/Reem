@@ -1,0 +1,6 @@
+{
+  "name": "Reem Portfolio",
+  "description": "Premium personal portfolio website for Reem, a web developer and AI automation expert, featuring a dark cinematic hero, grid layout services, featured project showcase, structured process map, flexible pricing, and free consultation booking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
