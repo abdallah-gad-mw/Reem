@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
-import heroBg from "../assets/images/hero_developer_bg_1779257580487.png";
+import heroBg from "../assets/images/abdallah-gad.webp";
 
 interface HeroProps {
   onStartProjectClick: () => void;
