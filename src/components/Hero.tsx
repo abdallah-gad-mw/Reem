@@ -78,10 +78,10 @@ export default function Hero({ onStartProjectClick }: HeroProps) {
           className="flex justify-center"
         >
           <span 
-            className="text-[16vw] sm:text-[16vw] md:text-[18vw] font-extrabold tracking-tight leading-none text-white text-center select-none"
+            className="text-[16vw] sm:text-[16vw] md:text-[12vw] font-extrabold tracking-tight leading-none text-white text-center select-none abdallah-hero-Wordmark"
             style={{ textShadow: "0 25px 50px rgba(0,0,0,0.65)" }}
           >
-            Reem
+            Abdallah
           </span>
         </motion.div>
       </div>

@@ -109,12 +109,12 @@ export default function Footer() {
       {/* Elegant, mammoth, bold center wordmark: reem.tech */}
       <div className="w-full text-center border-t border-white/5 pt-12 mt-12 select-none">
         <span className="block text-[14vw] sm:text-[14vw] md:text-[15vw] font-black tracking-tighter leading-none text-white transition-opacity select-none duration-500 hover:opacity-[0.85]">
-          reem.tech
+          ABDALLAH GAD
         </span>
         
         {/* Copyright details */}
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-gray-500 uppercase tracking-widest gap-2">
-          <span>© {currentYear} REEM. ALL RIGHTS RESERVED.</span>
+          <span>© {currentYear} ABDALLAH GAD. ALL RIGHTS RESERVED.</span>
           <span>DESIGNED & HANDCRAFTED WITH PRECISION</span>
         </div>
       </div>

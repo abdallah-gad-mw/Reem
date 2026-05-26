@@ -30,3 +30,9 @@
   }
 }
 
+@media (width >= 48rem) {
+  .abdallah-hero-Wordmark{
+    font-size: 160px;
+  }
+}
+
