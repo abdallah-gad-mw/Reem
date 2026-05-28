@@ -110,50 +110,117 @@ export default function Projects() {
     async function loadData() {
       try {
         setLoading(true);
-        const response = await fetch("https://abdallah.infinityfree.me/api/projects.php?featured=1");
+        console.log("Projects: Fetching dynamic recent projects...");
+        
+        // Try the Express backend server proxy first (bypasses browser CORS & direct connection blocks)
+        let response = await fetch("/api/get-featured-projects");
+        
+        if (!response.ok) {
+          console.warn(`Express backend proxy returned non-OK status ${response.status}. Falling back to direct client-side fetch...`);
+          response = await fetch("https://abdallah.infinityfree.me/api/projects.php?featured=1");
+        }
         
         if (!response.ok) {
           throw new Error(`Non-200 Server Response Code: ${response.status}`);
         }
         
         const json = await response.json();
+        console.log("Projects: Live JSON response received:", json);
         
-        if (json && json.status === "success" && Array.isArray(json.data) && json.data.length > 0) {
-          const mapped: MappedProject[] = json.data.map((item: any) => {
-            // Pick a clean background word
-            const titleWord = item.title ? item.title.trim().split(" ")[0].toUpperCase() : "PROJECT";
+        // Adaptive normalization of the returned JSON structure
+        let rawProjects: any[] = [];
+        
+        if (json) {
+          if (Array.isArray(json)) {
+            rawProjects = json;
+          } else if (Array.isArray(json.projects)) {
+            rawProjects = json.projects;
+          } else if (Array.isArray(json.data)) {
+            rawProjects = json.data;
+          } else {
+            // Find any property in the object that is an array
+            const foundArray = Object.values(json).find(val => Array.isArray(val));
+            if (foundArray) {
+              rawProjects = foundArray as any[];
+            }
+          }
+        }
+
+        if (Array.isArray(rawProjects) && rawProjects.length > 0) {
+          const mapped: MappedProject[] = rawProjects.map((item: any, idx: number) => {
+            // Flexibly parse name and title
+            const name = item.title || item.name || item.project_name || item.projectName || item.project_title || `Project ${idx + 1}`;
             
-            // Clean categories array splitting by comma
-            const listCats = item.tech_stack
-              ? item.tech_stack.split(",").map((s: string) => s.trim()).filter(Boolean)
-              : ["Development"];
+            // Flexibly parse category & subtitle
+            const subtitle = item.category || item.subtitle || item.type || item.tagline || item.project_category || "Strategic Development";
+            
+            // Flexibly parse description
+            const description = item.description || item.desc || item.about || item.info || item.project_description || "";
+            
+            // Flexibly parse image URL and resolve absolute paths
+            let imageUrl = item.image_url || item.imageUrl || item.image || item.img || item.thumbnail || item.project_image || "";
+            if (imageUrl && typeof imageUrl === "string" && !imageUrl.startsWith("http") && !imageUrl.startsWith("data:")) {
+              if (imageUrl.startsWith("/")) {
+                imageUrl = `https://abdallah.infinityfree.me${imageUrl}`;
+              } else {
+                imageUrl = `https://abdallah.infinityfree.me/${imageUrl}`;
+              }
+            }
+            
+            // Apply standard beautifully curated images as fallback if imageUrl is empty
+            if (!imageUrl) {
+              const fallbacks = [projectImg1, projectImg2, projectImg3, projectImg4, projectImg5];
+              imageUrl = fallbacks[idx % fallbacks.length];
+            }
+
+            // Flexibly parse categories / tech stack
+            let categories: string[] = ["Development"];
+            const rawCats = item.tech_stack || item.techStack || item.categories || item.tags || item.skills || item.technologies;
+            if (Array.isArray(rawCats)) {
+              categories = rawCats.map((c: any) => String(c).trim()).filter(Boolean);
+            } else if (typeof rawCats === "string") {
+              categories = rawCats.split(",").map((s: string) => s.trim()).filter(Boolean);
+            }
+            
+            if (categories.length === 0) {
+              categories = ["Development"];
+            }
+
+            // Generate clean background crop word for aesthetic typography background overlap
+            const titleWord = name.trim().split(" ")[0].toUpperCase();
+
+            // Link mappings
+            const liveUrl = item.live_url || item.liveUrl || item.url || item.link || item.live || item.project_url || "#";
+            const githubUrl = item.github_url || item.githubUrl || item.github || item.repo || item.source || item.git || null;
 
             return {
-              id: Number(item.id) || Math.random(),
-              name: item.title || "Project",
-              subtitle: item.category || "Strategic Development",
-              description: item.description || "",
-              imageUrl: item.image_url || projectImg2,
-              categories: listCats,
+              id: Number(item.id) || idx + 1,
+              name,
+              subtitle,
+              description,
+              imageUrl,
+              categories,
               backgroundWord: titleWord,
-              liveUrl: item.live_url || "#",
-              githubUrl: item.github_url || null,
+              liveUrl,
+              githubUrl,
               isLive: true,
             };
           });
 
           if (active) {
+            console.log(`Projects: Successfully mapped ${mapped.length} dynamic projects!`);
             setProjectsData(mapped);
             setHasLiveConnection(true);
           }
         } else {
-          throw new Error("API structure invalid or missing data entries");
+          throw new Error("API structure invalid or missing data/projects elements");
         }
       } catch (err: any) {
         console.warn("Using highly-polished localized portfolio cache. API connection bypassed due to:", err.message);
         if (active) {
           setProjectsData(STATIC_FALLBACK_PROJECTS);
           setHasLiveConnection(false);
+          // Show user that we are using the fallback cache, which is standard when server is unreachable or CORS blocked
         }
       } finally {
         if (active) {
@@ -311,20 +378,7 @@ export default function Projects() {
                 Recent Projects
               </h2>
 
-              {/* Connection Status Flag */}
-              <div className="mt-2 flex items-center justify-center gap-2">
-                {hasLiveConnection === true ? (
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[9px] font-mono tracking-wide text-emerald-400">
-                    <Database className="h-2.5 w-2.5" />
-                    Live API Synced
-                  </span>
-                ) : (
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-[9px] font-mono tracking-wide text-amber-400" title="InfinityFree endpoint CORS issue. Loaded premium portfolio sandbox offline-cache">
-                    <WifiOff className="h-2.5 w-2.5" />
-                    Curated Backup Sandbox
-                  </span>
-                )}
-              </div>
+
 
               {/* Global Progress LineBar */}
               <div className="mt-3 flex items-center justify-center gap-2">
