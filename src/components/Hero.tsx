@@ -56,7 +56,7 @@ export default function Hero({ onStartProjectClick }: HeroProps) {
             >
               <button
                 onClick={onStartProjectClick}
-                className="group inline-flex items-center gap-3 rounded-full bg-white px-5 py-3 text-sm font-semibold text-black transition-all hover:bg-opacity-90 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-black/35"
+                className="group inline-flex items-center gap-3 rounded-full bg-white px-5 py-3 text-sm font-semibold text-black transition-all hover:bg-opacity-90 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-black/35 cursor-pointer"
                 id="start-project-hero-btn"
               >
                 Start Your Project

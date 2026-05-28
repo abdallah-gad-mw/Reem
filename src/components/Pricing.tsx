@@ -88,7 +88,7 @@ export default function Pricing({ onPlanSelect }: PricingProps) {
 
           <button
             onClick={() => onPlanSelect("Starter Kit ($999)")}
-            className="group flex w-full items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 py-3.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-white/10 active:scale-[0.98] transition-all"
+            className="group flex w-full items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 py-3.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-white/10 active:scale-[0.98] cursor-pointer transition-all"
             id="order-starter-btn"
           >
             Choose Starter Kit
@@ -143,7 +143,7 @@ export default function Pricing({ onPlanSelect }: PricingProps) {
 
           <button
             onClick={() => onPlanSelect("Premium Elite (Starts at $2,000)")}
-            className="group flex w-full items-center justify-center gap-2 rounded-xl bg-black py-3.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-black/90 active:scale-[0.98] transition-all"
+            className="group flex w-full items-center justify-center gap-2 rounded-xl bg-black py-3.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-black/90 active:scale-[0.98] cursor-pointer transition-all"
             id="order-premium-btn"
           >
             Choose Premium
@@ -171,7 +171,7 @@ export default function Pricing({ onPlanSelect }: PricingProps) {
 
         <button
           onClick={() => onPlanSelect("Custom Customization Quote")}
-          className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white hover:bg-white/10 transition-all duration-300 flex-none"
+          className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white hover:bg-white/10 cursor-pointer transition-all duration-300 flex-none"
           id="quote-custom-btn"
         >
           Contact Me

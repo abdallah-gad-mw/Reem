@@ -118,7 +118,7 @@ export default function Booking() {
                         <button
                           key={day.dateStr}
                           onClick={() => handleDaySelect(idx)}
-                          className={`rounded-2xl p-4 border text-center transition-all ${
+                          className={`rounded-2xl p-4 border text-center cursor-pointer transition-all ${
                             selectedDayIndex === idx
                               ? "bg-white border-white text-black font-semibold shadow-lg shadow-white/5"
                               : "bg-[#0b101b] border-white/10 text-gray-300 hover:border-white/30 hover:bg-[#12192a]"
@@ -148,7 +148,7 @@ export default function Booking() {
                             <button
                               key={slot}
                               onClick={() => handleTimeSelect(slot)}
-                              className="rounded-xl border border-white/10 bg-white/5 py-2.5 text-xs font-semibold text-gray-200 hover:bg-white hover:text-black transition-all"
+                              className="rounded-xl border border-white/10 bg-white/5 py-2.5 text-xs font-semibold text-gray-200 hover:bg-white hover:text-black cursor-pointer transition-all"
                               id={`booking-slot-${slot.replace(/\s/g, "-")}`}
                             >
                               {slot}
@@ -216,7 +216,7 @@ export default function Booking() {
                       <button
                         type="submit"
                         disabled={isBooking}
-                        className="rounded-xl bg-white px-6 py-3 text-xs font-bold text-black uppercase tracking-wider hover:bg-opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+                        className="rounded-xl bg-white px-6 py-3 text-xs font-bold text-black uppercase tracking-wider hover:bg-opacity-90 active:scale-[0.98] cursor-pointer transition-all flex items-center justify-center gap-2"
                         id="confirm-booking-btn"
                       >
                         {isBooking ? "Scheduling Call..." : "Lock in Slot Now"}
@@ -229,7 +229,7 @@ export default function Booking() {
                           setBookingFormOpen(false);
                           setSelectedTimeSlot(null);
                         }}
-                        className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-xs hover:bg-white/10 transition-all text-gray-300"
+                        className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-xs hover:bg-white/10 cursor-pointer transition-all text-gray-300"
                         id="cancel-booking-btn"
                       >
                         Change Time
@@ -265,7 +265,7 @@ export default function Booking() {
                     setBookEmail("");
                     setBookBrief("");
                   }}
-                  className="mt-6 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 px-6 py-2 text-xs text-gray-300 hover:text-white transition-colors"
+                  className="mt-6 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 px-6 py-2 text-xs text-gray-300 hover:text-white cursor-pointer transition-colors"
                   id="reset-booking-test"
                 >
                   Book Another Call

@@ -82,7 +82,7 @@ export default function ContactModal({ isOpen, onClose, initialService = "" }: C
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#222227] bg-[#16161a] text-gray-400 hover:text-white transition-colors"
+              className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#222227] bg-[#16161a] text-gray-400 hover:text-white cursor-pointer transition-colors"
               aria-label="Close modal"
               id="close-modal-btn"
             >
@@ -142,7 +142,7 @@ export default function ContactModal({ isOpen, onClose, initialService = "" }: C
                       <select
                         value={service}
                         onChange={(e) => setService(e.target.value)}
-                        className="w-full rounded-xl border border-[#222227] bg-[#16161a] px-3 py-3 text-sm text-white focus:border-[#d97706] focus:outline-none transition-colors"
+                        className="w-full rounded-xl border border-[#222227] bg-[#16161a] px-3 py-3 text-sm text-white focus:border-[#d97706] focus:outline-none cursor-pointer transition-colors"
                         id="contact-service"
                       >
                         <option value="">General Inquiry</option>
@@ -161,7 +161,7 @@ export default function ContactModal({ isOpen, onClose, initialService = "" }: C
                       <select
                         value={budget}
                         onChange={(e) => setBudget(e.target.value)}
-                        className="w-full rounded-xl border border-[#222227] bg-[#16161a] px-3 py-3 text-sm text-white focus:border-[#d97706] focus:outline-none transition-colors"
+                        className="w-full rounded-xl border border-[#222227] bg-[#16161a] px-3 py-3 text-sm text-white focus:border-[#d97706] focus:outline-none cursor-pointer transition-colors"
                         id="contact-budget"
                       >
                         <option value="low">Under $1,000</option>
@@ -190,7 +190,7 @@ export default function ContactModal({ isOpen, onClose, initialService = "" }: C
                   <button
                     type="submit"
                     disabled={isSending}
-                    className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3.5 text-sm font-semibold text-black transition-all hover:bg-opacity-90 active:scale-[0.98] disabled:opacity-50"
+                    className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3.5 text-sm font-semibold text-black transition-all hover:bg-opacity-90 active:scale-[0.98] disabled:opacity-50 cursor-pointer"
                     id="submit-contact-btn"
                   >
                     {isSending ? (
@@ -225,7 +225,7 @@ export default function ContactModal({ isOpen, onClose, initialService = "" }: C
                     setSubmitted(false);
                     onClose();
                   }}
-                  className="mt-6 rounded-full border border-[#222227] bg-[#16161a] px-6 py-2.5 text-sm text-gray-300 hover:text-white transition-colors"
+                  className="mt-6 rounded-full border border-[#222227] bg-[#16161a] px-6 py-2.5 text-sm text-gray-300 hover:text-white cursor-pointer transition-colors"
                   id="done-modal-btn"
                 >
                   Close Window

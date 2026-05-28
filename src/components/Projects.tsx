@@ -318,15 +318,15 @@ export default function Projects() {
             </div>
 
             {/* Shimmer skeleton mimicking premium 3D Card dimensions */}
-            <div className="relative z-10 w-full max-w-[900px] mx-auto px-6 h-[480px] sm:h-[530px] md:h-[580px] flex items-center justify-center">
+            <div className="relative z-10 w-full max-w-[620px] mx-auto px-4 h-[410px] sm:h-[460px] md:h-[490px] flex items-center justify-center">
               <div className="w-full h-full rounded-[24px] sm:rounded-[32px] border border-[#222227]/70 bg-[#0c0c0f]/80 backdrop-blur-md shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] flex flex-col justify-between overflow-hidden">
                 {/* Shimmer Hero Image area */}
-                <div className="relative w-full h-[55%] bg-white/5 flex items-center justify-center overflow-hidden">
+                <div className="relative w-full h-[50%] bg-white/5 flex items-center justify-center overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-[shimmer_1.5s_infinite]" />
                   <RefreshCw className="h-6 w-6 text-[#e67e22]/50 animate-spin" />
                 </div>
                 {/* Shimmer explanation box */}
-                <div className="p-8 flex-1 flex flex-col justify-between bg-[#0b0b0d] border-t border-[#18181d]">
+                <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between bg-[#0b0b0d] border-t border-[#18181d]">
                   <div className="space-y-3">
                     <div className="h-4 bg-white/5 rounded-full w-2/3 animate-pulse" />
                     <div className="h-3 bg-white/5 rounded-full w-1/2 animate-pulse" />
@@ -366,7 +366,7 @@ export default function Projects() {
             </div>
 
             {/* Section Heading & Counter */}
-            <div className="relative z-10 text-center mb-8 px-6 flex-none">
+            <div className="relative z-10 text-center mb-6 px-6 flex-none">
               <div className="flex items-center justify-center gap-2 mb-1">
                 <span className="text-[10px] font-mono tracking-widest text-[#e67e22] uppercase font-bold">
                   Interactive Design Registry
@@ -377,8 +377,6 @@ export default function Projects() {
               <h2 className="text-3xl md:text-[38px] font-bold tracking-tight text-white mt-1">
                 Recent Projects
               </h2>
-
-
 
               {/* Global Progress LineBar */}
               <div className="mt-3 flex items-center justify-center gap-2">
@@ -397,7 +395,7 @@ export default function Projects() {
             </div>
 
             {/* Interactive Floating 3D Card Area */}
-            <div className="relative z-10 w-full max-w-[900px] mx-auto px-6 h-[480px] sm:h-[530px] md:h-[580px] max-h-[70vh] flex items-center justify-center">
+            <div className="relative z-10 w-full max-w-[620px] mx-auto px-4 h-[410px] sm:h-[460px] md:h-[490px] max-h-[65vh] flex items-center justify-center">
               <div style={{ perspective: 1800 }} className="relative w-full h-full flex items-center justify-center">
                 
                 <AnimatePresence custom={direction} mode="wait">
@@ -413,7 +411,7 @@ export default function Projects() {
                     id={`recent-project-main-card-${activeProject.id}`}
                   >
                     {/* Image Frame with Overlay & Quick Stats Counter */}
-                    <div className="relative w-full h-[55%] sm:h-[60%] overflow-hidden bg-black flex-none">
+                    <div className="relative w-full h-[52%] sm:h-[55%] overflow-hidden bg-black flex-none">
                       <img
                         src={activeProject.imageUrl}
                         alt={activeProject.name}
@@ -423,16 +421,21 @@ export default function Projects() {
                       {/* Premium shading overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-90" />
                       
-                      {/* Pill indicators floating in Image frame */}
-                      <div className="absolute top-4 sm:top-6 left-4 sm:left-6 flex items-center gap-2">
-                        <span className="px-3 py-1.5 rounded-full bg-black/75 border border-white/10 backdrop-blur-md text-[9px] font-mono tracking-widest text-[#e67e22] font-bold">
-                          ACTIVE SHOWCASE
-                        </span>
+                      {/* Substituted ACTIVE SHOWCASE label with category tags floating beautifully in Image frame */}
+                      <div className="absolute top-4 sm:top-6 left-4 sm:left-6 flex flex-wrap items-center gap-1.5 max-w-[70%]">
+                        {activeProject.categories.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2.5 py-1 rounded-full bg-black/80 border border-white/10 backdrop-blur-md text-[9px] font-mono font-bold tracking-wide text-[#e67e22] uppercase"
+                          >
+                            {tag}
+                          </span>
+                        ))}
                       </div>
 
                       {/* Corner card counter */}
                       <div className="absolute top-4 sm:top-6 right-4 sm:right-6">
-                        <span className="flex h-8 items-center justify-center rounded-full bg-black/75 border border-white/10 px-3.5 text-xs text-bold font-mono text-white tracking-widest select-none">
+                        <span className="flex h-7 items-center justify-center rounded-full bg-black/75 border border-white/10 px-2.5 text-[10px] font-bold font-mono text-white tracking-widest select-none">
                           {activeIndex + 1 < 10 ? `0${activeIndex + 1}` : activeIndex + 1} / {projectsData.length < 10 ? `0${projectsData.length}` : projectsData.length}
                         </span>
                       </div>
@@ -448,49 +451,24 @@ export default function Projects() {
                       </div>
                     </div>
 
-                    {/* Bottom Frame: Explanations and Tags */}
-                    <div className="p-5 sm:p-7 md:p-8 flex-1 flex flex-col justify-between bg-[#0b0b0d] border-t border-[#18181d]">
+                    {/* Bottom Frame: Explanations and Action Buttons placed at the left */}
+                    <div className="p-5 sm:p-6 md:p-7 flex-1 flex flex-col justify-between bg-[#0b0b0d] border-t border-[#18181d]">
                       
                       {/* Paragraph description */}
-                      <p className="text-xs sm:text-sm text-gray-400 leading-relaxed font-light line-clamp-2 sm:line-clamp-none">
+                      <p className="text-xs sm:text-sm text-gray-400 leading-relaxed font-light line-clamp-3">
                         {activeProject.description}
                       </p>
 
-                      {/* Row for category tags + Action Buttons */}
-                      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-3 mt-auto">
+                      {/* Row for category tags + Action Buttons (Action Buttons placed on the LEFT) */}
+                      <div className="flex items-center justify-between gap-4 pt-2.5 mt-auto">
                         
-                        {/* Tags block */}
-                        <div className="flex flex-wrap items-center gap-1.5">
-                          {activeProject.categories.map((tag) => (
-                            <span
-                              key={tag}
-                              className="px-3.5 py-1.5 rounded-full bg-[#121215] border border-[#222227] text-[10px] font-mono font-bold tracking-wide text-gray-400 hover:text-white transition-colors uppercase"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-
-                        {/* Compact Interactive Action Rows */}
-                        <div className="flex items-center gap-2.5 mt-2 sm:mt-0">
-                          {activeProject.githubUrl && (
-                            <a
-                              href={activeProject.githubUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="group inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white hover:bg-[#e67e22] hover:border-[#e67e22] hover:text-black transition-all duration-300"
-                              title="View Source on GitHub"
-                              id={`project-github-lnk-${activeProject.id}`}
-                            >
-                              <Github className="h-4 w-4" />
-                            </a>
-                          )}
-                          
+                        {/* Compact Interactive Action Rows on the LEFT */}
+                        <div className="flex items-center gap-2.5">
                           <a
                             href={activeProject.liveUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group inline-flex items-center justify-center gap-2 rounded-full border border-[#e67e22]/20 bg-[#e67e22]/10 py-2 px-4.5 text-xs font-semibold text-white hover:bg-[#e67e22] hover:text-black transition-all duration-300"
+                            className="group inline-flex items-center justify-center gap-2 rounded-full border border-[#e67e22]/20 bg-[#e67e22]/10 py-1.5 px-4 text-xs font-semibold text-white hover:bg-[#e67e22] hover:text-black cursor-pointer transition-all duration-300"
                             id={`project-web-lnk-${activeProject.id}`}
                           >
                             Preview Live
@@ -498,6 +476,19 @@ export default function Projects() {
                               <ArrowUpRight className="h-2.5 w-2.5" />
                             </span>
                           </a>
+
+                          {activeProject.githubUrl && (
+                            <a
+                              href={activeProject.githubUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="group inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white hover:bg-[#e67e22] hover:border-[#e67e22] hover:text-black cursor-pointer transition-all duration-300"
+                              title="View Source on GitHub"
+                              id={`project-github-lnk-${activeProject.id}`}
+                            >
+                              <Github className="h-4.5 w-4.5" />
+                            </a>
+                          )}
                         </div>
 
                       </div>
@@ -529,7 +520,7 @@ export default function Projects() {
                         });
                       }
                     }}
-                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                    className={`w-2.5 h-2.5 rounded-full cursor-pointer transition-all duration-300 ${
                       activeIndex === i
                         ? "bg-[#e67e22] scale-125 shadow-lg shadow-[#e67e22]/50"
                         : "bg-white/25 hover:bg-white/45"
@@ -541,10 +532,7 @@ export default function Projects() {
             </div>
 
             {/* Small Scroll helper layout element bottom */}
-            <div className="absolute bottom-6 flex flex-col items-center gap-1 z-10 pointer-events-none select-none">
-              <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">
-                Keep scrolling to reveal next
-              </span>
+            <div className="absolute bottom-4 flex flex-col items-center z-10 pointer-events-none select-none">
               <div className="w-1.5 h-6 rounded-full bg-white/5 border border-white/10 relative overflow-hidden">
                 <motion.div
                   className="absolute left-0 top-0 w-full h-2.5 bg-[#e67e22] rounded-full"

@@ -67,7 +67,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
               key={link.label}
               href={link.href}
               onClick={(e) => handleLinkClick(e, link.href)}
-              className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase transition-all duration-300 ${
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase cursor-pointer transition-all duration-300 ${
                 activeSection === link.href
                   ? "bg-white text-black"
                   : "text-gray-300 hover:text-white hover:bg-white/5"
@@ -80,10 +80,10 @@ export default function Navbar({ onContactClick }: NavbarProps) {
 
         {/* Mobile Navbar Content */}
         <div className="flex sm:hidden items-center justify-between w-full">
-          <span className="text-xs font-mono font-bold tracking-wider text-[#e69b5c]">REEM.</span>
+          <span className="text-xs font-mono font-bold tracking-wider text-[#e69b5c]">ABDALLAH.</span>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-white hover:text-[#e69b5c] transition-colors p-1"
+            className="text-white hover:text-[#e69b5c] transition-colors p-1 cursor-pointer"
             aria-label="Toggle menu"
             id="mobile-nav-toggle"
           >
@@ -102,7 +102,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
                 style={{ animationDelay: `${idx * 70}ms` }}
-                className="block text-2xl font-bold tracking-tight text-white hover:text-[#e69b5c] active:scale-95 transition-all animate-fade-in"
+                className="block text-2xl font-bold tracking-tight text-white hover:text-[#e69b5c] active:scale-95 transition-all animate-fade-in cursor-pointer"
               >
                 {link.label}
               </a>

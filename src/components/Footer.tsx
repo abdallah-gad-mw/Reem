@@ -21,7 +21,7 @@ export default function Footer() {
           <p className="text-[10px] font-mono tracking-widest text-[#e67e22] uppercase font-bold">Inquiries</p>
           <a
             href="mailto:reemtech0@gmail.com"
-            className="group flex items-center gap-2 text-xl font-bold hover:text-[#e67e22] transition-colors"
+            className="group flex items-center gap-2 text-xl font-bold hover:text-[#e67e22] cursor-pointer transition-colors"
           >
             reemtech0@gmail.com
             <Mail className="h-4.5 w-4.5 text-gray-500 group-hover:text-[#e67e22] transition-colors" />
@@ -39,7 +39,7 @@ export default function Footer() {
                   href="https://instagram.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex items-center gap-1 text-sm font-semibold hover:text-[#e67e22] transition-colors"
+                  className="group flex items-center gap-1 text-sm font-semibold hover:text-[#e67e22] cursor-pointer transition-colors"
                 >
                   Instagram
                   <ArrowUpRight className="h-3 w-3 text-gray-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
@@ -50,7 +50,7 @@ export default function Footer() {
                   href="https://linkedin.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex items-center gap-1 text-sm font-semibold hover:text-[#e67e22] transition-colors"
+                  className="group flex items-center gap-1 text-sm font-semibold hover:text-[#e67e22] cursor-pointer transition-colors"
                 >
                   LinkedIn
                   <ArrowUpRight className="h-3 w-3 text-gray-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
@@ -61,7 +61,7 @@ export default function Footer() {
                   href="https://twitter.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex items-center gap-1 text-sm font-semibold hover:text-[#e67e22] transition-colors"
+                  className="group flex items-center gap-1 text-sm font-semibold hover:text-[#e67e22] cursor-pointer transition-colors"
                 >
                   X / Twitter
                   <ArrowUpRight className="h-3 w-3 text-gray-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
@@ -78,7 +78,7 @@ export default function Footer() {
                 <a
                   href="#projects"
                   onClick={(e) => handleSmoothScroll(e, "#projects")}
-                  className="text-sm font-semibold hover:text-[#e67e22] transition-colors"
+                  className="text-sm font-semibold hover:text-[#e67e22] cursor-pointer transition-colors"
                 >
                   Projects
                 </a>
@@ -87,7 +87,7 @@ export default function Footer() {
                 <a
                   href="#pricing"
                   onClick={(e) => handleSmoothScroll(e, "#pricing")}
-                  className="text-sm font-semibold hover:text-[#e67e22] transition-colors"
+                  className="text-sm font-semibold hover:text-[#e67e22] cursor-pointer transition-colors"
                 >
                   Pricing
                 </a>
@@ -96,7 +96,7 @@ export default function Footer() {
                 <a
                   href="#booking"
                   onClick={(e) => handleSmoothScroll(e, "#booking")}
-                  className="text-sm font-semibold hover:text-[#e67e22] transition-colors"
+                  className="text-sm font-semibold hover:text-[#e67e22] cursor-pointer transition-colors"
                 >
                   Book a Call
                 </a>
