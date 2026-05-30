@@ -21,10 +21,10 @@ export default function Footer() {
         <div className="space-y-4">
           <p className="text-[10px] font-mono tracking-widest text-[#e67e22] uppercase font-bold">Inquiries</p>
           <a
-            href="mailto:reemtech0@gmail.com"
+            href="mailto:contact@abdallah.pro"
             className="group flex items-center gap-2 text-xl font-bold hover:text-[#e67e22] cursor-pointer transition-colors"
           >
-            reemtech0@gmail.com
+            contact@abdallah.pro
             <Mail className="h-4.5 w-4.5 text-gray-500 group-hover:text-[#e67e22] transition-colors" />
           </a>
         </div>
@@ -37,18 +37,18 @@ export default function Footer() {
             <ul className="space-y-2.5">
               <li>
                 <a
-                  href="https://instagram.com"
+                  href="https://github.com/abdallah-gad-mw/"
                   target="_blank"
                   rel="noreferrer"
                   className="group flex items-center gap-1 text-sm font-semibold hover:text-[#e67e22] cursor-pointer transition-colors"
                 >
-                  Instagram
+                  Github
                   <ArrowUpRight className="h-3 w-3 text-gray-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
                 </a>
               </li>
               <li>
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/abdallah-m-gad-3b7962206/"
                   target="_blank"
                   rel="noreferrer"
                   className="group flex items-center gap-1 text-sm font-semibold hover:text-[#e67e22] cursor-pointer transition-colors"
@@ -57,17 +57,7 @@ export default function Footer() {
                   <ArrowUpRight className="h-3 w-3 text-gray-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
                 </a>
               </li>
-              <li>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group flex items-center gap-1 text-sm font-semibold hover:text-[#e67e22] cursor-pointer transition-colors"
-                >
-                  X / Twitter
-                  <ArrowUpRight className="h-3 w-3 text-gray-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
-                </a>
-              </li>
+              
             </ul>
           </div>
 
