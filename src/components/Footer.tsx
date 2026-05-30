@@ -1,5 +1,6 @@
 import React from "react";
 import { Mail, ArrowUpRight } from "lucide-react";
+import { motion } from "motion/react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -106,11 +107,57 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Elegant, mammoth, bold center wordmark: reem.tech */}
+      {/* Elegant, mammoth, bold center wordmark: ABDALLAH GAD */}
       <div className="w-full text-center border-t border-white/5 pt-12 mt-12 select-none">
-        <span className="block text-[14vw] sm:text-[14vw] md:text-[15vw] font-black tracking-tighter leading-none text-white transition-opacity select-none duration-500 hover:opacity-[0.85]">
-          ABDALLAH GAD
-        </span>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-120px" }}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.08,
+                delayChildren: 0.1
+              }
+            }
+          }}
+          className="flex flex-wrap justify-center items-center gap-x-[3vw] text-center w-full select-none overflow-hidden"
+        >
+          {["ABDALLAH", "GAD"].map((word, wordIdx) => (
+            <span key={wordIdx} className="inline-flex flex-nowrap text-[14vw] sm:text-[14vw] md:text-[15vw] font-black tracking-tighter leading-none text-white uppercase select-none">
+              {word.split("").map((char, charIdx) => (
+                <motion.span
+                  key={charIdx}
+                  variants={{
+                    hidden: { 
+                      opacity: 0, 
+                      scale: 3.5, 
+                      filter: "blur(15px)",
+                      color: "#e67e22" 
+                    },
+                    visible: { 
+                      opacity: 1, 
+                      scale: 1, 
+                      filter: "blur(0px)",
+                      color: "#ffffff",
+                      transition: { 
+                        type: "spring",
+                        damping: 15,
+                        stiffness: 75,
+                        duration: 0.95
+                      }
+                    }
+                  }}
+                  className="inline-block origin-center hover:text-[#e67e22] transition-colors duration-200"
+                  style={{ display: "inline-block" }}
+                >
+                  {char}
+                </motion.span>
+              ))}
+            </span>
+          ))}
+        </motion.div>
         
         {/* Copyright details */}
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-gray-500 uppercase tracking-widest gap-2">

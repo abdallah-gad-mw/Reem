@@ -9,10 +9,14 @@ import Pricing from "./components/Pricing";
 import Booking from "./components/Booking";
 import Footer from "./components/Footer";
 import ContactModal from "./components/ContactModal";
+import { useSvgDrawingAnimation } from "./hooks/useSvgDrawingAnimation";
 
 export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState("");
+
+  // Activate drawing animation on scroll for all icons and SVGs on the page
+  useSvgDrawingAnimation();
 
   const handleStartProjectClick = () => {
     setSelectedService("");

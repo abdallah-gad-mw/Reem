@@ -70,18 +70,54 @@ export default function Hero({ onStartProjectClick }: HeroProps) {
       </div>
 
       {/* Gigantic OVERLAPPING Name Wordmark */}
-      <div className="relative w-full z-20 pointer-events-none select-none overflow-hidden -mt-16 md:-mt-32 lg:-mt-44 pb-3 sm:pb-5">
+      <div className="relative pointer-events-none w-full z-20 select-none overflow-hidden -mt-16 md:-mt-32 lg:-mt-44 pb-3 sm:pb-5">
         <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, type: "spring", stiffness: 45, delay: 0.4 }}
-          className="flex justify-center"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.2
+              }
+            }
+          }}
+          className="flex justify-center items-center text-center px-4 w-full"
         >
           <span 
-            className="text-[16vw] sm:text-[16vw] md:text-[12vw] font-extrabold tracking-tight leading-none text-white text-center select-none abdallah-hero-Wordmark"
+            className="inline-flex text-[16vw] sm:text-[16vw] md:text-[12vw] font-extrabold tracking-tight leading-none text-white text-center select-none abdallah-hero-Wordmark"
             style={{ textShadow: "0 25px 50px rgba(0,0,0,0.65)" }}
           >
-            Abdallah
+            {"Abdallah".split("").map((char, index) => (
+              <motion.span
+                key={index}
+                variants={{
+                  hidden: { 
+                    opacity: 0, 
+                    scale: 3.5, 
+                    filter: "blur(15px)",
+                    color: "#e67e22" 
+                  },
+                  visible: { 
+                    opacity: 1, 
+                    scale: 1, 
+                    filter: "blur(0px)",
+                    color: "#ffffff",
+                    transition: { 
+                      type: "spring",
+                      damping: 15,
+                      stiffness: 75,
+                      duration: 0.95
+                    }
+                  }
+                }}
+                className="inline-block origin-center hover:text-[#e67e22] transition-colors duration-200"
+                style={{ display: "inline-block" }}
+              >
+                {char}
+              </motion.span>
+            ))}
           </span>
         </motion.div>
       </div>
