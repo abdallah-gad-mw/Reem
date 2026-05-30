@@ -1,66 +1,58 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Calendar, Clock, Star, Users, CheckCircle2, ChevronRight, Sparkles, Send } from "lucide-react";
+import { Star, CheckCircle2, Send, Sparkles, User, Mail, MessageSquare, DollarSign, Briefcase } from "lucide-react";
 
 export default function Booking() {
-  const [selectedDayIndex, setSelectedDayIndex] = useState<number | null>(null);
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null);
-  const [bookingFormOpen, setBookingFormOpen] = useState(false);
-  
-  // Custom form state
-  const [bookName, setBookName] = useState("");
-  const [bookEmail, setBookEmail] = useState("");
-  const [bookBrief, setBookBrief] = useState("");
-  const [isBooking, setIsBooking] = useState(false);
-  const [bookingSuccess, setBookingSuccess] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [projectType, setProjectType] = useState("");
+  const [budget, setBudget] = useState("");
+  const [brief, setBrief] = useState("");
+  const [isSending, setIsSending] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
-  const availableDays = [
-    { dayName: "Thu", dateStr: "May 21", slots: ["10:30 AM", "1:30 PM", "3:00 PM", "5:30 PM"] },
-    { dayName: "Fri", dateStr: "May 22", slots: ["11:00 AM", "2:00 PM", "4:30 PM"] },
-    { dayName: "Mon", dateStr: "May 25", slots: ["9:30 AM", "11:30 AM", "2:00 PM", "4:00 PM", "6:00 PM"] },
-    { dayName: "Tue", dateStr: "May 26", slots: ["10:00 AM", "1:00 PM", "3:30 PM", "5:00 PM"] },
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !email || !projectType || !budget || !brief) return;
+
+    setIsSending(true);
+    setTimeout(() => {
+      setIsSending(false);
+      setSubmitted(true);
+    }, 1500);
+  };
+
+  const projectOptions = [
+    { value: "saas", label: "SaaS / Web App" },
+    { value: "ecommerce", label: "E-Commerce" },
+    { value: "landing", label: "Landing Page / Funnel" },
+    { value: "automation", label: "AI & Automation Integration" },
+    { value: "custom", label: "Custom Solution" }
   ];
 
-  const handleDaySelect = (index: number) => {
-    setSelectedDayIndex(index);
-    setSelectedTimeSlot(null);
-    setBookingFormOpen(false);
-  };
-
-  const handleTimeSelect = (slot: string) => {
-    setSelectedTimeSlot(slot);
-    setBookingFormOpen(true);
-  };
-
-  const handleSubmitBooking = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!bookName || !bookEmail) return;
-
-    setIsBooking(true);
-    setTimeout(() => {
-      setIsBooking(false);
-      setBookingSuccess(true);
-    }, 1200);
-  };
-
-  const selectedDay = selectedDayIndex !== null ? availableDays[selectedDayIndex] : null;
+  const budgetOptions = [
+    { value: "under-1k", label: "Under $1,000" },
+    { value: "1k-3k", label: "$1,000 - $3,000" },
+    { value: "3k-5k", label: "$3,000 - $5,000" },
+    { value: "custom", label: "$5,000+" }
+  ];
 
   return (
     <section className="relative w-full max-w-[1100px] mx-auto px-6 py-24 text-white" id="booking">
       {/* Headings */}
       <div className="text-center mb-16">
         <span className="text-[10px] font-mono tracking-widest text-[#e67e22] uppercase font-bold">
-          Free Consultation
+          Get in Touch
         </span>
         <h2 className="text-3xl md:text-[38px] font-bold tracking-tight text-white mt-1">
-          Book a Free Call
+          Start Your Project Brief
         </h2>
         <p className="text-sm text-gray-400 mt-2 max-w-lg mx-auto">
-          Let’s Create Something Amazing — Book a Session Now!
+          Let’s Create Something Amazing — Send me your ideas & requirements below!
         </p>
       </div>
 
-      {/* Main interactive TidyCal design card */}
+      {/* Main interactive inquiry design card */}
       <div className="max-w-[850px] mx-auto rounded-3xl overflow-hidden border border-[#222227] bg-[#111115] shadow-2xl">
         {/* Dark Top Area - Details */}
         <div className="p-6 md:p-8 border-b border-[#222227] bg-[#0c0c0f]">
@@ -69,216 +61,210 @@ export default function Booking() {
             {/* Header / Host details */}
             <div className="flex items-center gap-3">
               <div className="h-12 w-12 rounded-full bg-[#1b1109] border border-[#e67e22]/20 flex items-center justify-center font-bold text-[#e67e22]">
-                RM
+                AG
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <h3 className="font-bold text-base text-white">Reem Tech</h3>
+                  <h3 className="font-bold text-base text-white">Abdallah Gad</h3>
                   <div className="flex items-center gap-0.5 text-xs text-amber-500">
                     <Star className="h-3 w-3 fill-amber-500" />
                     <Star className="h-3 w-3 fill-amber-500" />
                     <Star className="h-3 w-3 fill-amber-500" />
                     <Star className="h-3 w-3 fill-amber-500" />
                     <Star className="h-3 w-3 fill-amber-500" />
-                    <span className="text-[10px] text-gray-400 font-mono ml-1">(2 reviews)</span>
+                    <span className="text-[10px] text-gray-400 font-mono ml-1">(5/5 rating)</span>
                   </div>
                 </div>
-                <p className="text-xs text-[#e67e22] font-mono mt-0.5">web developer / AI Automation specialist</p>
+                <p className="text-xs text-[#e67e22] font-mono mt-0.5">Full-Stack Web Developer & AI Specialist</p>
               </div>
             </div>
 
-            {/* Time Indicator */}
+            {/* Response Time Indicator */}
             <div className="flex items-center gap-2 rounded-xl bg-white/5 border border-white/10 px-4 py-2 text-xs font-mono font-bold text-gray-300">
-              <Clock className="h-3.5 w-3.5 text-[#e67e22]" />
-              <span>30 Minute Strategy Call</span>
+              <Sparkles className="h-3.5 w-3.5 text-[#e67e22]" />
+              <span>Responses in Under 24 Hours</span>
             </div>
           </div>
 
           <p className="mt-6 text-xs text-gray-400 leading-relaxed font-light max-w-2xl">
-            Building a website shouldn't be stressful. Grab a coffee and let's have a casual 1-on-1 chat about your business needs. I'll answer your questions about design, automation, scope, and pricing to see if we're a perfect fit for a collaborative partnership.
+            Providing clear, actionable project scopes is what I do. Fill out the interactive brief below to sketch out your features, timeline, and goals. I will carefully review your requirements and respond with a detailed technical roadmap.
           </p>
         </div>
 
-        {/* Calendar Interaction Form Area (Light Blue Bottom / Steel Bottom Accent) */}
+        {/* Inline Form Area (Gradient Steel Bottom Accent) */}
         <div className="relative bg-gradient-to-b from-[#131b2c] to-[#090d16] p-6 md:p-8 min-h-[340px] flex flex-col justify-center">
           <AnimatePresence mode="wait">
-            {!bookingSuccess ? (
-              <div className="space-y-6">
-                <div>
-                  <h4 className="text-sm font-bold text-[#e67e22] uppercase tracking-wider font-mono">
-                    {!bookingFormOpen ? "1. Select a Day" : `2. You Selected ${selectedDay?.dayName}, ${selectedDay?.dateStr} at ${selectedTimeSlot}`}
-                  </h4>
+            {!submitted ? (
+              <motion.form
+                key="booking-form"
+                initial={{ opacity: 1 }}
+                exit={{ opacity: 0, y: -20 }}
+                onSubmit={handleSubmit}
+                className="space-y-6"
+              >
+                {/* Name & Email */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="flex items-center gap-1.5 text-xs font-mono uppercase text-gray-400">
+                      <User className="h-3.5 w-3.5 text-[#e67e22]" />
+                      <span>Full Name</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={name}
+                      placeholder="e.g. Alice Johnson"
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-xs text-white placeholder-gray-500 focus:border-[#e67e22] focus:bg-white/10 focus:outline-none transition-all duration-300"
+                      id="brief-form-name"
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="flex items-center gap-1.5 text-xs font-mono uppercase text-gray-400">
+                      <Mail className="h-3.5 w-3.5 text-[#e67e22]" />
+                      <span>Email Address</span>
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={email}
+                      placeholder="e.g. alice@company.com"
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-xs text-white placeholder-gray-500 focus:border-[#e67e22] focus:bg-white/10 focus:outline-none transition-all duration-300"
+                      id="brief-form-email"
+                    />
+                  </div>
                 </div>
 
-                {!bookingFormOpen ? (
-                  <div>
-                    {/* Choose Day Grid */}
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                      {availableDays.map((day, idx) => (
-                        <button
-                          key={day.dateStr}
-                          onClick={() => handleDaySelect(idx)}
-                          className={`rounded-2xl p-4 border text-center cursor-pointer transition-all ${
-                            selectedDayIndex === idx
-                              ? "bg-white border-white text-black font-semibold shadow-lg shadow-white/5"
-                              : "bg-[#0b101b] border-white/10 text-gray-300 hover:border-white/30 hover:bg-[#12192a]"
-                          }`}
-                          id={`booking-day-${idx}`}
-                        >
-                          <span className="block text-xs uppercase tracking-wider font-mono opacity-60">
-                            {day.dayName}
-                          </span>
-                          <span className="block text-lg font-bold mt-1">
-                            {day.dateStr}
-                          </span>
-                        </button>
+                {/* Project Type & Budget Option Row */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="flex items-center gap-1.5 text-xs font-mono uppercase text-gray-400">
+                      <Briefcase className="h-3.5 w-3.5 text-[#e67e22]" />
+                      <span>Project Category</span>
+                    </label>
+                    <select
+                      value={projectType}
+                      required
+                      onChange={(e) => setProjectType(e.target.value)}
+                      className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-xs text-white cursor-pointer focus:border-[#e67e22] focus:bg-white/10 focus:outline-none transition-all duration-300 appearance-none bg-no-repeat"
+                      style={{ 
+                        backgroundImage: 'url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23e67e22\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3E%3Cpolyline points=\'6 9 12 15 18 9\'%3E%3C/polyline%3E%3C/svg%3E")',
+                        backgroundPosition: 'right 16px center', 
+                        backgroundSize: '12px' 
+                      }}
+                      id="brief-form-type"
+                    >
+                      <option value="" className="bg-[#0c0c0f] text-gray-500">Select standard project tier...</option>
+                      {projectOptions.map((opt) => (
+                        <option key={opt.value} value={opt.value} className="bg-[#0c0c0f] text-white">
+                          {opt.label}
+                        </option>
                       ))}
-                    </div>
-
-                    {/* Choose Time Slots for selected day */}
-                    {selectedDayIndex !== null && selectedDay && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="mt-6"
-                      >
-                        <h5 className="text-xs font-bold text-gray-400 mb-3 font-mono">Available slots on {selectedDay.dayName}, {selectedDay.dateStr}:</h5>
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                          {selectedDay.slots.map((slot) => (
-                            <button
-                              key={slot}
-                              onClick={() => handleTimeSelect(slot)}
-                              className="rounded-xl border border-white/10 bg-white/5 py-2.5 text-xs font-semibold text-gray-200 hover:bg-white hover:text-black cursor-pointer transition-all"
-                              id={`booking-slot-${slot.replace(/\s/g, "-")}`}
-                            >
-                              {slot}
-                            </button>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {selectedDayIndex === null && (
-                      <div className="flex flex-col items-center justify-center py-6 text-center text-xs text-gray-400">
-                        <Calendar className="h-8 w-8 text-white/20 mb-2" />
-                        <p>Please select an upcoming digital slot to view local available times.</p>
-                      </div>
-                    )}
+                    </select>
                   </div>
-                ) : (
-                  /* Booking Confirmation Mini Form */
-                  <motion.form
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    onSubmit={handleSubmitBooking}
-                    className="space-y-4 max-w-lg"
+                  <div className="space-y-1.5">
+                    <label className="flex items-center gap-1.5 text-xs font-mono uppercase text-gray-400">
+                      <DollarSign className="h-3.5 w-3.5 text-[#e67e22]" />
+                      <span>Comfortable Budget</span>
+                    </label>
+                    <select
+                      value={budget}
+                      required
+                      onChange={(e) => setBudget(e.target.value)}
+                      className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-xs text-white cursor-pointer focus:border-[#e67e22] focus:bg-white/10 focus:outline-none transition-all duration-300 appearance-none bg-no-repeat"
+                      style={{ 
+                        backgroundImage: 'url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23e67e22\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3E%3Cpolyline points=\'6 9 12 15 18 9\'%3E%3C/polyline%3E%3C/svg%3E")',
+                        backgroundPosition: 'right 16px center', 
+                        backgroundSize: '12px' 
+                      }}
+                      id="brief-form-budget"
+                    >
+                      <option value="" className="bg-[#0c0c0f] text-gray-500">Pick comfortable tier...</option>
+                      {budgetOptions.map((opt) => (
+                        <option key={opt.value} value={opt.value} className="bg-[#0c0c0f] text-white">
+                          {opt.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* Brief details */}
+                <div className="space-y-1.5">
+                  <label className="flex items-center gap-1.5 text-xs font-mono uppercase text-gray-400">
+                    <MessageSquare className="h-3.5 w-3.5 text-[#e67e22]" />
+                    <span>Project Brief & Details</span>
+                  </label>
+                  <textarea
+                    required
+                    rows={4}
+                    value={brief}
+                    maxLength={1000}
+                    placeholder="Describe your design inspirations, feature goals, required target deadline, and overall objectives..."
+                    onChange={(e) => setBrief(e.target.value)}
+                    className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-xs text-white placeholder-gray-500 focus:border-[#e67e22] focus:bg-white/10 focus:outline-none transition-all duration-300 resize-none"
+                    id="brief-form-details"
+                  />
+                  <div className="flex justify-end text-[10px] font-mono text-gray-500">
+                    {brief.length}/1000 characters
+                  </div>
+                </div>
+
+                <div className="flex justify-start pt-2">
+                  <button
+                    type="submit"
+                    disabled={isSending}
+                    className="rounded-full bg-white px-7 py-3.5 text-xs font-bold text-black uppercase tracking-wider hover:bg-[#e67e22] hover:text-black hover:scale-[1.02] active:scale-[0.98] cursor-pointer transition-all flex items-center justify-center gap-2 shadow-lg shadow-black/40"
+                    id="submit-brief-btn"
                   >
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs font-mono uppercase text-gray-400 mb-1">Your Name</label>
-                        <input
-                          type="text"
-                          required
-                          value={bookName}
-                          placeholder="e.g. Alice"
-                          onChange={(e) => setBookName(e.target.value)}
-                          className="w-full rounded-xl border border-white/10 bg-white/10 px-4 py-2.5 text-xs text-white placeholder-gray-500 focus:border-white focus:outline-none transition-colors"
-                          id="booking-form-name"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-xs font-mono uppercase text-gray-400 mb-1">Your Email</label>
-                        <input
-                          type="email"
-                          required
-                          value={bookEmail}
-                          placeholder="e.g. alice@company.com"
-                          onChange={(e) => setBookEmail(e.target.value)}
-                          className="w-full rounded-xl border border-white/10 bg-white/10 px-4 py-2.5 text-xs text-white placeholder-gray-500 focus:border-white focus:outline-none transition-colors"
-                          id="booking-form-email"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-mono uppercase text-gray-400 mb-1">Brief Project Idea</label>
-                      <input
-                        type="text"
-                        value={bookBrief}
-                        placeholder="e.g. SaaS redesign with WhatsApp chatbot auto-replies..."
-                        onChange={(e) => setBookBrief(e.target.value)}
-                        className="w-full rounded-xl border border-white/10 bg-white/10 px-4 py-2.5 text-xs text-white placeholder-gray-500 focus:border-white focus:outline-none transition-colors"
-                        id="booking-form-brief"
-                      />
-                    </div>
-
-                    <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                      <button
-                        type="submit"
-                        disabled={isBooking}
-                        className="rounded-xl bg-white px-6 py-3 text-xs font-bold text-black uppercase tracking-wider hover:bg-opacity-90 active:scale-[0.98] cursor-pointer transition-all flex items-center justify-center gap-2"
-                        id="confirm-booking-btn"
-                      >
-                        {isBooking ? "Scheduling Call..." : "Lock in Slot Now"}
-                        <ChevronRight className="h-3 w-3" />
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setBookingFormOpen(false);
-                          setSelectedTimeSlot(null);
-                        }}
-                        className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-xs hover:bg-white/10 cursor-pointer transition-all text-gray-300"
-                        id="cancel-booking-btn"
-                      >
-                        Change Time
-                      </button>
-                    </div>
-                  </motion.form>
-                )}
-              </div>
+                    <span>{isSending ? "Analyzing & Submitting..." : "Submit Project Brief"}</span>
+                    <Send className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+              </motion.form>
             ) : (
               /* Success Stage */
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
+                key="booking-success"
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="flex flex-col items-center justify-center py-8 text-center"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-4">
-                  <CheckCircle2 className="h-6 w-6" />
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-4 animate-pulse">
+                  <CheckCircle2 className="h-7 w-7" />
                 </div>
-                <h3 className="text-lg font-bold text-white uppercase tracking-tight font-sans">
-                  Video-session Confirmed!
+                <h3 className="text-xl font-bold text-white uppercase tracking-tight font-sans">
+                  Inquiry Received!
                 </h3>
-                <p className="mt-2 text-xs text-gray-300 max-w-md">
-                  We are booked for <span className="text-white font-semibold">{selectedDay?.dayName}, {selectedDay?.dateStr} at {selectedTimeSlot} (30 mins)</span>. Check your inbox <span className="font-semibold text-white">{bookEmail}</span> for calendar attachments.
+                <p className="mt-2 text-xs text-gray-300 max-w-md leading-relaxed">
+                  Thank you, <span className="text-white font-semibold">{name}</span>. Your brief has been submitted successfully. I will carefully analyze your requirements and reach out to you at <span className="font-semibold text-[#e67e22]">{email}</span> within 24 hours.
                 </p>
 
                 <button
+                  type="button"
                   onClick={() => {
-                    setBookingSuccess(false);
-                    setBookingFormOpen(false);
-                    setSelectedDayIndex(null);
-                    setSelectedTimeSlot(null);
-                    setBookName("");
-                    setBookEmail("");
-                    setBookBrief("");
+                    setSubmitted(false);
+                    setName("");
+                    setEmail("");
+                    setProjectType("");
+                    setBudget("");
+                    setBrief("");
                   }}
-                  className="mt-6 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 px-6 py-2 text-xs text-gray-300 hover:text-white cursor-pointer transition-colors"
+                  className="mt-6 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 px-6 py-2.5 text-xs text-gray-300 hover:text-white cursor-pointer transition-colors"
                   id="reset-booking-test"
                 >
-                  Book Another Call
+                  Submit Another Brief
                 </button>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
 
-        {/* Powered by TidyCal bar */}
+        {/* Footer info line */}
         <div className="py-3.5 px-6 text-center bg-[#0a0a0d] border-t border-[#18181d] text-[10px] font-mono tracking-widest text-gray-500 flex items-center justify-center gap-1.5 uppercase">
-          <span>Powered By</span>
-          <span className="font-extrabold text-[#52bcfd]">TidyCal</span>
+          <Sparkles className="h-3 w-3 text-[#e67e22]" />
+          <span>secure & compliant end-to-end data processing</span>
         </div>
       </div>
     </section>
